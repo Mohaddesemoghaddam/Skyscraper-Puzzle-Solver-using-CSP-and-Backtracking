@@ -1,48 +1,74 @@
-# Advanced Map Coloring with Neighbourhood Awareness
-This file contains a template for solving the Skyscraper problem. You have to complete the code to implement the solution.  
-The goal of the Skyscraper Puzzle is to fill a grid with numbers, representing building heights, so that each row and column contains unique values from 1 up to the grid size. Clues around the grid indicate the number of visible buildings from that vantage point, with taller buildings blocking the view of shorter ones behind them. The solution must satisfy both the uniqueness and visibility constraints for all rows and columns.
+# Skyscraper Puzzle Solver with CSP & Heuristics
 
+This project implements a solver for the **Skyscraper Puzzle** using 
+Constraint Satisfaction Problem (CSP) techniques and heuristic strategies.
 
-## Installation
+The **Skyscraper Puzzle** is a logic-based grid game where each row and 
+column must contain unique values from `1` to the grid size. Clues around 
+the grid indicate how many buildings are visible from that side. Taller 
+buildings block shorter ones behind them. The solution must satisfy both 
+**uniqueness** and **visibility** constraints.
 
-```python
+---
+
+Installation
+------------
+
+Clone the repository and install the dependencies:
+
+```bash
 pip install -r requirements.txt
 ```
-## Contents
-Below is a brief overview of the contents: 
 
-- CSP.py: Contains the CSP class representing a Constraint Satisfaction Problem and provides functions to define CSP problems.
+---
 
-- graphics.py: Functions for visualizing the table based on the solution found.
+Project Structure
+-----------------
 
-- test_case_generator.py: Generates grids with arbitrary size.
+* **CSP.py** → Defines the CSP class and helper functions for CSP problems  
+* **Solver.py** → Algorithms and heuristics for solving the puzzle  
+* **graphics.py** → Visualization functions for displaying solutions  
+* **test_case_generator.py** → Generates puzzle grids of arbitrary size  
+* **main.py** → Entry point to run the solver with user-defined parameters  
 
-- Solver.py: Contains a class with functions to implement algorithms for finding the CSP solution.
+---
 
-- main.py: Main file to execute the code with specified parameters.
+Parameters
+----------
 
-## Parameters
-* -m, --map: Specifies the table to solve. 
+* `-m, --map` → Specifies the puzzle map to solve  
+* `-lcv, --lcv` → Enable **Least Constraining Value (LCV)** heuristic  
+* `-mrv, --mrv` → Enable **Minimum Remaining Values (MRV)** heuristic  
+* `-MAC, --maintaining_arc_consistency` → Enforce arc consistency by pruning invalid values  
 
-* -lcv, --lcv: Enables the Least Constraint Value (LCV) heuristic as an order-type optimizer.
+---
 
-* -mrv, --mrv: Enables the Minimum Remaining Values (MRV) heuristic as an order-type optimizer.
+Usage
+-----
 
-* -MAC, --maintaining_arc_consistency: Processes constraints to remove values from variable domains that violate constraint consistency.
+Run the solver via `main.py` with custom parameters.
 
+### Example 1: Solve map 3 with LCV and MRV
+```bash
+python3 main.py -m3 -lcv -mrv
+```
 
-## Running the Code
-To run the code, you have to execute main.py with the following command format: 
-
-* If you want to solve map 3 with lcv and mrv heuristics: 
-
-python3 main.py -m3 -lcv -mrv 
-(If python 3 is the default version on your system, you can simply use python instead of python3: 
-python main.py -m3 -lcv -mrv)
- 
-* If you want to also enable arc consistency: 
-
+### Example 2: Solve map 2 with LCV, MRV, and Arc Consistency
+```bash
 python3 main.py -m2 -lcv -mrv -MAC
+```
 
-you can observe the number of assignments for each run, which is displayed above the table, enabling you to compare algorithms.
+After each run, the number of assignments is displayed, allowing you to  
+compare the effectiveness of different heuristics.
 
+---
+
+Key Features
+------------
+
+* CSP-based solver with heuristics (LCV, MRV)  
+* Support for arc consistency to reduce search space  
+* Visualization of solutions  
+* Test case generator for arbitrary grid sizes  
+
+---
